@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Gerenciamento_eventos.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -49,6 +49,48 @@ namespace Gerenciamento_eventos.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Criador",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Criador", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Local",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Endereco = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Capacidade = table.Column<int>(type: "int", nullable: false),
+                    Descricao = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Local", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Participante",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Telefone = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Participante", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -157,6 +199,68 @@ namespace Gerenciamento_eventos.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Evento",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Descricao = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    Data = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LocalId = table.Column<int>(type: "int", nullable: false),
+                    CriadorId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ParticipanteId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Evento", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Evento_Criador_CriadorId",
+                        column: x => x.CriadorId,
+                        principalTable: "Criador",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Evento_Local_LocalId",
+                        column: x => x.LocalId,
+                        principalTable: "Local",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Evento_Participante_ParticipanteId",
+                        column: x => x.ParticipanteId,
+                        principalTable: "Participante",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Inscricao",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EventoId = table.Column<int>(type: "int", nullable: false),
+                    ParticipanteId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    DataInscricao = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Inscricao", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Inscricao_Evento_EventoId",
+                        column: x => x.EventoId,
+                        principalTable: "Evento",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Inscricao_Participante_ParticipanteId",
+                        column: x => x.ParticipanteId,
+                        principalTable: "Participante",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -195,6 +299,31 @@ namespace Gerenciamento_eventos.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Evento_CriadorId",
+                table: "Evento",
+                column: "CriadorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Evento_LocalId",
+                table: "Evento",
+                column: "LocalId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Evento_ParticipanteId",
+                table: "Evento",
+                column: "ParticipanteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Inscricao_EventoId",
+                table: "Inscricao",
+                column: "EventoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Inscricao_ParticipanteId",
+                table: "Inscricao",
+                column: "ParticipanteId");
         }
 
         /// <inheritdoc />
@@ -216,10 +345,25 @@ namespace Gerenciamento_eventos.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Inscricao");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Evento");
+
+            migrationBuilder.DropTable(
+                name: "Criador");
+
+            migrationBuilder.DropTable(
+                name: "Local");
+
+            migrationBuilder.DropTable(
+                name: "Participante");
         }
     }
 }

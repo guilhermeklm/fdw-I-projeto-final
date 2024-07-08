@@ -17,13 +17,28 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-togglser-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                    </ul>
-                </div>
+                @{
+                    if (User.Identity?.IsAuthenticated ?? false)
+                    {
+                        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                            <ul class="navbar-nav flex-grow-1">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Evento" asp-action="Index">Eventos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Local" asp-action="Index">Locais</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Patrocinador" asp-action="Index">Patrocinadores</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Inscricao" asp-action="Index">Minhas Inscricoes</a>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+                }
+               
             </div>
             @Html.Partial("_LoginPartial")
         </nav>

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Gerenciamento_eventos.Models;
 
 namespace Gerenciamento_eventos.Data;
 
@@ -19,4 +20,14 @@ public class Gerenciamento_eventosContext : IdentityDbContext<Usuario>
         // For example, you can rename the ASP.NET Identity table names and more.
         // Add your customizations after calling base.OnModelCreating(builder);
     }
+
+    public DbSet<Gerenciamento_eventos.Models.Evento> Evento { get; set; } = default!;
+
+    public DbSet<Gerenciamento_eventos.Models.Local> Local { get; set; } = default!;
+
+    public DbSet<Gerenciamento_eventos.Models.Participante> Participante { get; set; } = default!;
+
+    public DbSet<Gerenciamento_eventos.Models.Inscricao> Inscricao { get; set; } = default!;
+
+    public DbSet<Gerenciamento_eventos.Models.Patrocinador> Patrocinador { get; set; } = default!;
 }

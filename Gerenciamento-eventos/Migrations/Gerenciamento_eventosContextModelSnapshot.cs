@@ -91,6 +91,184 @@ namespace Gerenciamento_eventos.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("Gerenciamento_eventos.Models.Criador", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UsuarioId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Criador");
+                });
+
+            modelBuilder.Entity("Gerenciamento_eventos.Models.Evento", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CriadorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CriadorUsuarioId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("LocalId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("ParticipanteId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("PatrocinadorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CriadorId");
+
+                    b.HasIndex("LocalId");
+
+                    b.HasIndex("ParticipanteId");
+
+                    b.HasIndex("PatrocinadorId");
+
+                    b.ToTable("Evento");
+                });
+
+            modelBuilder.Entity("Gerenciamento_eventos.Models.Inscricao", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("DataInscricao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EventoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ParticipanteId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ParticipanteUsuarioId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventoId");
+
+                    b.HasIndex("ParticipanteId");
+
+                    b.ToTable("Inscricao");
+                });
+
+            modelBuilder.Entity("Gerenciamento_eventos.Models.Local", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Capacidade")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Endereco")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Local");
+                });
+
+            modelBuilder.Entity("Gerenciamento_eventos.Models.Participante", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UsuarioId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Participante");
+                });
+
+            modelBuilder.Entity("Gerenciamento_eventos.Models.Patrocinador", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Patrocinador");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -228,6 +406,48 @@ namespace Gerenciamento_eventos.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Gerenciamento_eventos.Models.Evento", b =>
+                {
+                    b.HasOne("Gerenciamento_eventos.Models.Criador", "Criador")
+                        .WithMany()
+                        .HasForeignKey("CriadorId");
+
+                    b.HasOne("Gerenciamento_eventos.Models.Local", "Local")
+                        .WithMany("Eventos")
+                        .HasForeignKey("LocalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Gerenciamento_eventos.Models.Participante", null)
+                        .WithMany("Eventos")
+                        .HasForeignKey("ParticipanteId");
+
+                    b.HasOne("Gerenciamento_eventos.Models.Patrocinador", null)
+                        .WithMany("Eventos")
+                        .HasForeignKey("PatrocinadorId");
+
+                    b.Navigation("Criador");
+
+                    b.Navigation("Local");
+                });
+
+            modelBuilder.Entity("Gerenciamento_eventos.Models.Inscricao", b =>
+                {
+                    b.HasOne("Gerenciamento_eventos.Models.Evento", "Evento")
+                        .WithMany("Inscricoes")
+                        .HasForeignKey("EventoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Gerenciamento_eventos.Models.Participante", "Participante")
+                        .WithMany("Inscricoes")
+                        .HasForeignKey("ParticipanteId");
+
+                    b.Navigation("Evento");
+
+                    b.Navigation("Participante");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -277,6 +497,28 @@ namespace Gerenciamento_eventos.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Gerenciamento_eventos.Models.Evento", b =>
+                {
+                    b.Navigation("Inscricoes");
+                });
+
+            modelBuilder.Entity("Gerenciamento_eventos.Models.Local", b =>
+                {
+                    b.Navigation("Eventos");
+                });
+
+            modelBuilder.Entity("Gerenciamento_eventos.Models.Participante", b =>
+                {
+                    b.Navigation("Eventos");
+
+                    b.Navigation("Inscricoes");
+                });
+
+            modelBuilder.Entity("Gerenciamento_eventos.Models.Patrocinador", b =>
+                {
+                    b.Navigation("Eventos");
                 });
 #pragma warning restore 612, 618
         }

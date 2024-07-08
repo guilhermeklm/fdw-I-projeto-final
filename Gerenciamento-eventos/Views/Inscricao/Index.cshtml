@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Gerenciamento_eventos.Models.Inscricao>
+
+@{
+    ViewData["Title"] = "Index";
+    var eventos = ViewBag.Eventos as List<Gerenciamento_eventos.Models.Evento>;
+}
+
+<h1 class="mt-4 mb-4">Inscrições</h1>
+
+<p>
+    <a class="btn btn-primary mb-3" href="@Url.Action("Index", "Evento")">Voltar para Eventos</a>
+</p>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill" /></svg>
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="list-group">
+    @foreach (var inscricao in Model)
+    {
+        var evento = eventos.FirstOrDefault(e => e.Id == inscricao.EventoId);
+        if (evento != null)
+        {
+            <div class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">@evento.Nome</h5>
+                    <small>@inscricao.DataInscricao.ToShortDateString()</small>
+                </div>
+                <div class="mt-2">
+                    <form asp-action="Desinscricao" asp-route-id="@inscricao.EventoId" method="post">
+                        <a class="btn btn-info btn-sm" href="@Url.Action("Details", "Evento", new {id = evento.Id})">Details </a>
+                        <button type="submit" class="btn btn-secondary btn-sm">Cancelar Inscrição</button>
+                    </form>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <!-- SVG symbols omitted for brevity -->
+</svg>

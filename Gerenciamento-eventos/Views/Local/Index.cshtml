@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Gerenciamento_eventos.Models.Local>
+
+@{
+    ViewData["Title"] = "Locais";
+}
+
+<h1 class="mt-4 mb-4">Locais</h1>
+
+<p>
+    <a class="btn btn-primary mb-3" asp-action="Create">Criar Novo Local</a>
+</p>
+
+<div class="list-group">
+    @foreach (var item in Model)
+    {
+        <div class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">@item.Nome</h5>
+            </div>
+            <p class="mb-1">Endereço: @item.Endereco</p>
+            <p class="mb-1">Capacidade: @item.Capacidade</p>
+            <p class="mb-1">Descrição: @item.Descricao</p>
+            <div class="mt-2">
+                <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.Id">Detalhes</a>
+                <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

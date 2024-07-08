@@ -1,0 +1,41 @@
+﻿@model Gerenciamento_eventos.Models.Local
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1 class="mt-4 text-danger">Deletar Local</h1>
+
+<div class="card mt-4">
+    <div class="card-header bg-danger text-white">
+        <h4 class="mb-0">Tem certeza de que deseja deletar este local?</h4>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-2">Nome</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.Nome)</dd>
+
+            <dt class="col-sm-2">Endereço</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.Endereco)</dd>
+
+            <dt class="col-sm-2">Capacidade</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.Capacidade)</dd>
+
+            <dt class="col-sm-2">Descrição</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.Descricao)</dd>
+        </dl>
+    </div>
+    <div class="card-footer text-end">
+        <form asp-action="Delete" class="d-inline">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger">Deletar</button>
+        </form>
+        <a asp-action="Index" class="btn btn-secondary ms-2">Voltar para Lista</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -24,6 +24,9 @@
             <dt class="col-sm-2">Local</dt>
             <dd class="col-sm-10">@Html.DisplayFor(model => model.Local.Nome)</dd>
 
+            <dt class="col-sm-2">Patrocinador</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.Patrocinador.Nome)</dd>
+
             <dt class="col-sm-2">Criador</dt>
             <dd class="col-sm-10">@Html.DisplayFor(model => model.Criador.Nome)</dd>
         </dl>
@@ -33,6 +36,8 @@
         <a asp-action="Index" class="btn btn-secondary">Voltar para Lista</a>
     </div>
 </div>
+
+// add contador de inscricoes quando for o criador do evento ou todo mundo?
 
 @section Scripts {
     @{

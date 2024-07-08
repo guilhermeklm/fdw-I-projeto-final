@@ -37,6 +37,12 @@
                 <span asp-validation-for="LocalId" class="text-danger"></span>
             </div>
 
+            <div class="mb-3">
+                <label asp-for="PatrocinadorId" class="form-label"></label>
+                <select asp-for="PatrocinadorId" class="form-select" asp-items="ViewBag.PatrocinadorId"></select>
+                <span asp-validation-for="PatrocinadorId" class="text-danger"></span>
+            </div>
+
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <input type="submit" value="Criar" class="btn btn-primary" />
                 <a asp-action="Index" class="btn btn-secondary">Voltar à Lista</a>

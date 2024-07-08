@@ -98,8 +98,8 @@ namespace Gerenciamento_eventos.Controllers
 
             var user = _userManager.GetUserAsync(User).Result;
 
-            var participante = _context.Participante.First(p => p.Id == user.Id);
-            var inscricao = _context.Inscricao.First(i => i.EventoId == id && i.ParticipanteUsuarioId == participante.Id);
+            var participante = _context.Participante.First(p => p.UsuarioId == user.Id);
+            var inscricao = _context.Inscricao.First(i => i.EventoId == id && i.ParticipanteUsuarioId == participante.UsuarioId);
 
             _context.Inscricao.Remove(inscricao);
             _context.Participante.Remove(participante);

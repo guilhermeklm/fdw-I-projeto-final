@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gerenciamento_eventos.Migrations
 {
     [DbContext(typeof(Gerenciamento_eventosContext))]
-    [Migration("20240708054019_create-participante-id")]
-    partial class createparticipanteid
+    [Migration("20240708224207_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -147,6 +147,9 @@ namespace Gerenciamento_eventos.Migrations
                     b.Property<string>("ParticipanteId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("PatrocinadorId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CriadorId");
@@ -154,6 +157,8 @@ namespace Gerenciamento_eventos.Migrations
                     b.HasIndex("LocalId");
 
                     b.HasIndex("ParticipanteId");
+
+                    b.HasIndex("PatrocinadorId");
 
                     b.ToTable("Evento");
                 });
@@ -240,6 +245,31 @@ namespace Gerenciamento_eventos.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Participante");
+                });
+
+            modelBuilder.Entity("Gerenciamento_eventos.Models.Patrocinador", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Patrocinador");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -395,9 +425,17 @@ namespace Gerenciamento_eventos.Migrations
                         .WithMany("Eventos")
                         .HasForeignKey("ParticipanteId");
 
+                    b.HasOne("Gerenciamento_eventos.Models.Patrocinador", "Patrocinador")
+                        .WithMany("Eventos")
+                        .HasForeignKey("PatrocinadorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Criador");
 
                     b.Navigation("Local");
+
+                    b.Navigation("Patrocinador");
                 });
 
             modelBuilder.Entity("Gerenciamento_eventos.Models.Inscricao", b =>
@@ -483,6 +521,11 @@ namespace Gerenciamento_eventos.Migrations
                     b.Navigation("Eventos");
 
                     b.Navigation("Inscricoes");
+                });
+
+            modelBuilder.Entity("Gerenciamento_eventos.Models.Patrocinador", b =>
+                {
+                    b.Navigation("Eventos");
                 });
 #pragma warning restore 612, 618
         }

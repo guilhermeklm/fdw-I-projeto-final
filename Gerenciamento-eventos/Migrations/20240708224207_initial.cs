@@ -56,6 +56,7 @@ namespace Gerenciamento_eventos.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UsuarioId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -84,13 +85,28 @@ namespace Gerenciamento_eventos.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UsuarioId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Participante", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Patrocinador",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Telefone = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Participante", x => x.Id);
+                    table.PrimaryKey("PK_Patrocinador", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -209,7 +225,9 @@ namespace Gerenciamento_eventos.Migrations
                     Descricao = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Data = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LocalId = table.Column<int>(type: "int", nullable: false),
-                    CriadorId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CriadorUsuarioId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CriadorId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    PatrocinadorId = table.Column<int>(type: "int", nullable: false),
                     ParticipanteId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
@@ -219,8 +237,7 @@ namespace Gerenciamento_eventos.Migrations
                         name: "FK_Evento_Criador_CriadorId",
                         column: x => x.CriadorId,
                         principalTable: "Criador",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Evento_Local_LocalId",
                         column: x => x.LocalId,
@@ -232,6 +249,12 @@ namespace Gerenciamento_eventos.Migrations
                         column: x => x.ParticipanteId,
                         principalTable: "Participante",
                         principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Evento_Patrocinador_PatrocinadorId",
+                        column: x => x.PatrocinadorId,
+                        principalTable: "Patrocinador",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -241,8 +264,9 @@ namespace Gerenciamento_eventos.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     EventoId = table.Column<int>(type: "int", nullable: false),
-                    ParticipanteId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    DataInscricao = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ParticipanteUsuarioId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DataInscricao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ParticipanteId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -257,8 +281,7 @@ namespace Gerenciamento_eventos.Migrations
                         name: "FK_Inscricao_Participante_ParticipanteId",
                         column: x => x.ParticipanteId,
                         principalTable: "Participante",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -316,6 +339,11 @@ namespace Gerenciamento_eventos.Migrations
                 column: "ParticipanteId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Evento_PatrocinadorId",
+                table: "Evento",
+                column: "PatrocinadorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Inscricao_EventoId",
                 table: "Inscricao",
                 column: "EventoId");
@@ -364,6 +392,9 @@ namespace Gerenciamento_eventos.Migrations
 
             migrationBuilder.DropTable(
                 name: "Participante");
+
+            migrationBuilder.DropTable(
+                name: "Patrocinador");
         }
     }
 }

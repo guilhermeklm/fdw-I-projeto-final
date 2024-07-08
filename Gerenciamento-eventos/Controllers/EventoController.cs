@@ -26,7 +26,10 @@ namespace Gerenciamento_eventos.Controllers
         // GET: Evento
         public async Task<IActionResult> Index()
         {
-            var gerenciamento_eventosContext = _context.Evento.Include(e => e.Local);
+            var gerenciamento_eventosContext = _context.Evento
+                .Include(e => e.Local)
+                .Include(e => e.Patrocinador);
+
             ViewBag.UserId = _userManager.GetUserAsync(User).Result.Id;
             var eventos = await gerenciamento_eventosContext.ToListAsync();
 
@@ -46,6 +49,7 @@ namespace Gerenciamento_eventos.Controllers
             var evento = await _context.Evento
                 .Include(e => e.Local)
                 .Include(e => e.Criador)
+                .Include(e => e.Patrocinador)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (evento == null)
@@ -60,6 +64,7 @@ namespace Gerenciamento_eventos.Controllers
         public IActionResult Create()
         {
             ViewData["LocalId"] = new SelectList(_context.Set<Local>(), "Id", "Nome");
+            ViewData["PatrocinadorId"] = new SelectList(_context.Set<Patrocinador>(), "Id", "Nome");
             return View();
         }
 
@@ -68,7 +73,7 @@ namespace Gerenciamento_eventos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Descricao,Data,LocalId")] Evento evento)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Descricao,Data,LocalId,PatrocinadorId")] Evento evento)
         {
             if (evento.LocalId != 0) {
                 evento.Local = _context.Local.Find(evento.LocalId);
@@ -77,8 +82,24 @@ namespace Gerenciamento_eventos.Controllers
                     return BadRequest("Local nao encontrado");   
                 }
             }
+            else
+            {
+                return BadRequest("Local é obrigatorio");
+            }
 
-           var user = _userManager.GetUserAsync(User);
+            if (evento.PatrocinadorId != 0)
+            {
+                evento.Patrocinador = _context.Patrocinador.Find(evento.PatrocinadorId);
+
+                if (evento.Patrocinador == null)
+                {
+                    return BadRequest("Patrocinador nao encontrado");
+                }
+            } else {
+                return BadRequest("Patrocinador é obrigatorio");
+            }
+
+            var user = _userManager.GetUserAsync(User);
             if (user != null)
             {
                 evento.CriadorUsuarioId = user.Result.Id;
@@ -111,6 +132,7 @@ namespace Gerenciamento_eventos.Controllers
             }
 
             ViewData["LocalId"] = new SelectList(_context.Set<Local>(), "Id", "Nome");
+            ViewData["PatrocinadorId"] = new SelectList(_context.Set<Patrocinador>(), "Id", "Nome");
             return View(evento);
         }
 
@@ -119,35 +141,45 @@ namespace Gerenciamento_eventos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Descricao,Data,LocalId")] Evento evento)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Descricao,Data,LocalId,PatrocinadorId")] Evento evento)
         {
             if (id != evento.Id)
             {
-                return NotFound();
+                return NotFound("Evento nao encontrado");
             }
 
-            if (ModelState.IsValid)
+            var eventoSaved = _context.Evento.First(e => e.Id == id);
+
+            if (eventoSaved == null)
             {
-                try
-                {
-                    _context.Update(evento);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EventoExists(evento.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                return NotFound("Evento nao encontrado");
             }
+
+            if (evento.PatrocinadorId != 0)
+            {
+                evento.Patrocinador = _context.Patrocinador.Find(evento.PatrocinadorId);
+
+                if (evento.Patrocinador == null)
+                {
+                    return BadRequest("Patrocinador nao encontrado");
+                }
+            }
+            else
+            {
+                return BadRequest("Patrocinador é obrigatorio");
+            }
+
+            eventoSaved.Nome = evento.Nome;
+            eventoSaved.LocalId = evento.LocalId;
+            eventoSaved.PatrocinadorId = evento.PatrocinadorId;
+            eventoSaved.Data = evento.Data;
+            eventoSaved.Descricao = evento.Descricao;
+
+            await _context.SaveChangesAsync();
+
             ViewData["LocalId"] = new SelectList(_context.Set<Local>(), "Id", "Nome");
-            return View(evento);
+            ViewData["PatrocinadorId"] = new SelectList(_context.Set<Patrocinador>(), "Id", "Nome");
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Evento/Delete/5
@@ -160,7 +192,10 @@ namespace Gerenciamento_eventos.Controllers
 
             var evento = await _context.Evento
                 .Include(e => e.Local)
+                .Include(e => e.Criador)
+                .Include(e => e.Patrocinador)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (evento == null)
             {
                 return NotFound();
@@ -238,8 +273,8 @@ namespace Gerenciamento_eventos.Controllers
 
             var user = _userManager.GetUserAsync(User).Result;
             
-            var participante = _context.Participante.First(p => p.Id == user.Id);
-            var inscricao = _context.Inscricao.First(i => i.EventoId == id && i.ParticipanteUsuarioId == participante.Id);
+            var participante = _context.Participante.First(p => p.UsuarioId == user.Id);
+            var inscricao = _context.Inscricao.First(i => i.EventoId == id && i.ParticipanteUsuarioId == participante.UsuarioId);
 
             _context.Inscricao.Remove(inscricao);
             _context.Participante.Remove(participante);

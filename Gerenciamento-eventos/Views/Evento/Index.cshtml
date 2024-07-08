@@ -30,6 +30,9 @@
             </div>
             <p class="mb-1">@item.Descricao</p>
             <small>Local: @item.Local.Nome</small>
+            <div>
+                <small>Patrocinador: @item.Patrocinador.Nome</small>
+            </div>
             <div class="mt-2">
                 @if (ViewBag.UserId == item.CriadorUsuarioId)
                 {

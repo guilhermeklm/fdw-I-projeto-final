@@ -144,7 +144,7 @@ namespace Gerenciamento_eventos.Migrations
                     b.Property<string>("ParticipanteId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("PatrocinadorId")
+                    b.Property<int>("PatrocinadorId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -422,13 +422,17 @@ namespace Gerenciamento_eventos.Migrations
                         .WithMany("Eventos")
                         .HasForeignKey("ParticipanteId");
 
-                    b.HasOne("Gerenciamento_eventos.Models.Patrocinador", null)
+                    b.HasOne("Gerenciamento_eventos.Models.Patrocinador", "Patrocinador")
                         .WithMany("Eventos")
-                        .HasForeignKey("PatrocinadorId");
+                        .HasForeignKey("PatrocinadorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Criador");
 
                     b.Navigation("Local");
+
+                    b.Navigation("Patrocinador");
                 });
 
             modelBuilder.Entity("Gerenciamento_eventos.Models.Inscricao", b =>

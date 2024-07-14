@@ -9,6 +9,7 @@ using Gerenciamento_eventos.Data;
 using Gerenciamento_eventos.Models;
 using Microsoft.AspNetCore.Identity;
 using Gerenciamento_eventos.Areas.Identity.Data;
+using Gerenciamento_eventos.Models.ViewModel;
 
 namespace Gerenciamento_eventos.Controllers
 {
@@ -28,13 +29,19 @@ namespace Gerenciamento_eventos.Controllers
         {
             var gerenciamento_eventosContext = _context.Evento
                 .Include(e => e.Local)
-                .Include(e => e.Patrocinador);
+                .Include(e => e.Patrocinador)
+                .Include(e => e.Inscricoes); // Inclua as inscrições
 
             ViewBag.UserId = _userManager.GetUserAsync(User).Result.Id;
             var eventos = await gerenciamento_eventosContext.ToListAsync();
 
+            var eventosViewModel = eventos.Select(e => new EventoViewModel
+            {
+                Evento = e,
+                InscricoesCount = e.Inscricoes.Count
+            }).ToList();
 
-            return View(eventos);
+            return View(eventosViewModel);
         }
 
         // GET: Evento/Details/5
@@ -49,6 +56,7 @@ namespace Gerenciamento_eventos.Controllers
                 .Include(e => e.Local)
                 .Include(e => e.Criador)
                 .Include(e => e.Patrocinador)
+                .Include(e => e.Inscricoes)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (evento == null)
@@ -56,7 +64,15 @@ namespace Gerenciamento_eventos.Controllers
                 return NotFound();
             }
 
-            return View(evento);
+            var viewModel = new EventoViewModel
+            {
+                Evento = evento,
+                InscricoesCount = evento.Inscricoes.Count
+            };
+
+            ViewBag.UserId = _userManager.GetUserAsync(User).Result.Id;
+
+            return View(viewModel);
         }
 
         // GET: Evento/Create
@@ -86,16 +102,17 @@ namespace Gerenciamento_eventos.Controllers
                 return BadRequest("Local é obrigatorio");
             }
 
-            if (evento.PatrocinadorId != 0)
+            if (evento.PatrocinadorId.HasValue && evento.PatrocinadorId.Value != 0)
             {
-                evento.Patrocinador = _context.Patrocinador.Find(evento.PatrocinadorId);
-
+                evento.Patrocinador = await _context.Patrocinador.FindAsync(evento.PatrocinadorId.Value);
                 if (evento.Patrocinador == null)
                 {
-                    return BadRequest("Patrocinador nao encontrado");
+                    return BadRequest("Patrocinador não encontrado");
                 }
-            } else {
-                return BadRequest("Patrocinador é obrigatorio");
+            }
+            else
+            {
+                evento.PatrocinadorId = null;
             }
 
             var user = _userManager.GetUserAsync(User);
@@ -130,10 +147,11 @@ namespace Gerenciamento_eventos.Controllers
                 return NotFound();
             }
 
-            ViewData["LocalId"] = new SelectList(_context.Set<Local>(), "Id", "Nome");
-            ViewData["PatrocinadorId"] = new SelectList(_context.Set<Patrocinador>(), "Id", "Nome");
+            ViewData["LocalId"] = new SelectList(_context.Set<Local>(), "Id", "Nome", evento.LocalId);
+            ViewData["PatrocinadorId"] = new SelectList(_context.Set<Patrocinador>(), "Id", "Nome", evento.PatrocinadorId);
             return View(evento);
         }
+
 
         // POST: Evento/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -154,18 +172,17 @@ namespace Gerenciamento_eventos.Controllers
                 return NotFound("Evento nao encontrado");
             }
 
-            if (evento.PatrocinadorId != 0)
+            if (evento.PatrocinadorId.HasValue && evento.PatrocinadorId.Value != 0)
             {
-                evento.Patrocinador = _context.Patrocinador.Find(evento.PatrocinadorId);
-
+                evento.Patrocinador = await _context.Patrocinador.FindAsync(evento.PatrocinadorId.Value);
                 if (evento.Patrocinador == null)
                 {
-                    return BadRequest("Patrocinador nao encontrado");
+                    return BadRequest("Patrocinador não encontrado");
                 }
             }
             else
             {
-                return BadRequest("Patrocinador é obrigatorio");
+                evento.PatrocinadorId = null;
             }
 
             eventoSaved.Nome = evento.Nome;

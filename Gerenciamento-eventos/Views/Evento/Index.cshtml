@@ -1,8 +1,7 @@
-﻿@model IEnumerable<Gerenciamento_eventos.Models.Evento>
+﻿@model IEnumerable<Gerenciamento_eventos.Models.ViewModel.EventoViewModel>
 
 @{
     ViewData["Title"] = "Index";
-    var inscricoes = ViewBag.Inscricoes as List<Gerenciamento_eventos.Models.Inscricao>;
 }
 
 <h1 class="mt-4 mb-4">Eventos</h1>
@@ -25,33 +24,39 @@
     {
         <div class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">@item.Nome</h5>
-                <small>@item.Data.ToShortDateString()</small>
+                <h5 class="mb-1">@item.Evento.Nome</h5>
+                <small>@item.Evento.Data.ToShortDateString()</small>
             </div>
-            <p class="mb-1">@item.Descricao</p>
-            <small>Local: @item.Local.Nome</small>
+            <p class="mb-1">@item.Evento.Descricao</p>
+            <small>Local: @item.Evento.Local.Nome (Endereço: @item.Evento.Local.Endereco)</small>
+            @if (@item.Evento.Patrocinador != null)
+            {
+                <div>
+                    <small>Patrocinador: @item.Evento.Patrocinador.Nome</small>
+                </div>
+            }
             <div>
-                <small>Patrocinador: @item.Patrocinador.Nome</small>
+                <small>Inscritos: @item.InscricoesCount</small>
             </div>
             <div class="mt-2">
-                @if (ViewBag.UserId == item.CriadorUsuarioId)
+                @if (ViewBag.UserId == item.Evento.CriadorUsuarioId)
                 {
-                    <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
-                    <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.Id">Detalhes</a>
-                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
+                    <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.Evento.Id">Editar</a>
+                    <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.Evento.Id">Detalhes</a>
+                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Evento.Id">Excluir</a>
                 }
                 else
                 {
-                    var isInscrito = inscricoes.Any(i => i.EventoId == item.Id && i.ParticipanteUsuarioId == ViewBag.UserId);
+                    var isInscrito = item.Evento.Inscricoes.Any(i => i.ParticipanteUsuarioId == ViewBag.UserId);
                     if (isInscrito)
                     {
-                        <a class="btn btn-secondary btn-sm" asp-action="Desinscricao" asp-route-id="@item.Id">Cancelar Inscrição</a>
-                        <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.Id">Detalhes</a>
+                        <a class="btn btn-secondary btn-sm" asp-action="Desinscricao" asp-route-id="@item.Evento.Id">Cancelar Inscrição</a>
+                        <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.Evento.Id">Detalhes</a>
                     }
                     else
                     {
-                        <a class="btn btn-success btn-sm" asp-action="Inscricao" asp-route-id="@item.Id">Inscrever</a>
-                        <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.Id">Detalhes</a>
+                        <a class="btn btn-success btn-sm" asp-action="Inscricao" asp-route-id="@item.Evento.Id">Inscrever</a>
+                        <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.Evento.Id">Detalhes</a>
                     }
                 }
             </div>

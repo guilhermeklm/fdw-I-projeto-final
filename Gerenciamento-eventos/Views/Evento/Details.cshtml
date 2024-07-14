@@ -1,4 +1,4 @@
-﻿@model Gerenciamento_eventos.Models.Evento
+﻿@model Gerenciamento_eventos.Models.ViewModel.EventoViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -13,31 +13,38 @@
     <div class="card-body">
         <dl class="row">
             <dt class="col-sm-2">Nome</dt>
-            <dd class="col-sm-10">@Html.DisplayFor(model => model.Nome)</dd>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.Evento.Nome)</dd>
 
             <dt class="col-sm-2">Descrição</dt>
-            <dd class="col-sm-10">@Html.DisplayFor(model => model.Descricao)</dd>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.Evento.Descricao)</dd>
 
             <dt class="col-sm-2">Data</dt>
-            <dd class="col-sm-10">@Html.DisplayFor(model => model.Data)</dd>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.Evento.Data)</dd>
 
             <dt class="col-sm-2">Local</dt>
-            <dd class="col-sm-10">@Html.DisplayFor(model => model.Local.Nome)</dd>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.Evento.Local.Nome) (Endereço: @Html.DisplayFor(model => model.Evento.Local.Endereco))</dd>
 
-            <dt class="col-sm-2">Patrocinador</dt>
-            <dd class="col-sm-10">@Html.DisplayFor(model => model.Patrocinador.Nome)</dd>
+            @if (Model.Evento.Patrocinador != null)
+            {
+                <dt class="col-sm-2">Patrocinador</dt>
+                <dd class="col-sm-10">@Html.DisplayFor(model => model.Evento.Patrocinador.Nome)</dd>
+            }
 
             <dt class="col-sm-2">Criador</dt>
-            <dd class="col-sm-10">@Html.DisplayFor(model => model.Criador.Nome)</dd>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.Evento.Criador.Nome)</dd>
+
+            <dt class="col-sm-2">Inscritos</dt>
+            <dd class="col-sm-10">@Model.InscricoesCount</dd>
         </dl>
     </div>
     <div class="card-footer text-end">
-        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning me-2">Editar</a>
+        @if (Model.Evento.CriadorUsuarioId == ViewBag.UserId)
+        {
+            <a asp-action="Edit" asp-route-id="@Model.Evento.Id" class="btn btn-warning me-2">Editar</a>
+        }
         <a asp-action="Index" class="btn btn-secondary">Voltar para Lista</a>
     </div>
 </div>
-
-// add contador de inscricoes quando for o criador do evento ou todo mundo?
 
 @section Scripts {
     @{

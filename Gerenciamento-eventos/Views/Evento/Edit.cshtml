@@ -39,7 +39,9 @@
 
             <div class="mb-3">
                 <label asp-for="PatrocinadorId" class="form-label"></label>
-                <select asp-for="PatrocinadorId" class="form-select" asp-items="ViewBag.PatrocinadorId"></select>
+                <select asp-for="PatrocinadorId" class="form-select" asp-items="ViewBag.PatrocinadorId">
+                    <option value="">Nenhum</option>
+                </select>
                 <span asp-validation-for="PatrocinadorId" class="text-danger"></span>
             </div>
 
@@ -56,5 +58,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

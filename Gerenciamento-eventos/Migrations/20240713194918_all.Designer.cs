@@ -4,6 +4,7 @@ using Gerenciamento_eventos.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gerenciamento_eventos.Migrations
 {
     [DbContext(typeof(Gerenciamento_eventosContext))]
-    partial class Gerenciamento_eventosContextModelSnapshot : ModelSnapshot
+    [Migration("20240713194918_all")]
+    partial class all
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -130,8 +133,8 @@ namespace Gerenciamento_eventos.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasMaxLength(3000)
-                        .HasColumnType("nvarchar(3000)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<int>("LocalId")
                         .HasColumnType("int");
@@ -144,7 +147,7 @@ namespace Gerenciamento_eventos.Migrations
                     b.Property<string>("ParticipanteId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("PatrocinadorId")
+                    b.Property<int>("PatrocinadorId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -424,7 +427,9 @@ namespace Gerenciamento_eventos.Migrations
 
                     b.HasOne("Gerenciamento_eventos.Models.Patrocinador", "Patrocinador")
                         .WithMany("Eventos")
-                        .HasForeignKey("PatrocinadorId");
+                        .HasForeignKey("PatrocinadorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Criador");
 

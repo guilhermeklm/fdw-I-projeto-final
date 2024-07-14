@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gerenciamento_eventos.Migrations
 {
     [DbContext(typeof(Gerenciamento_eventosContext))]
-    [Migration("20240708224207_initial")]
-    partial class initial
+    [Migration("20240713201921_patrocinador-nao-obrigatorio")]
+    partial class patrocinadornaoobrigatorio
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -147,7 +147,7 @@ namespace Gerenciamento_eventos.Migrations
                     b.Property<string>("ParticipanteId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("PatrocinadorId")
+                    b.Property<int?>("PatrocinadorId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -427,9 +427,7 @@ namespace Gerenciamento_eventos.Migrations
 
                     b.HasOne("Gerenciamento_eventos.Models.Patrocinador", "Patrocinador")
                         .WithMany("Eventos")
-                        .HasForeignKey("PatrocinadorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PatrocinadorId");
 
                     b.Navigation("Criador");
 

@@ -25,6 +25,7 @@ namespace Gerenciamento_eventos.Models
         public Local Local { get; set; }
         public string CriadorUsuarioId { get; set; }
         public Criador Criador { get; set; }
+        [Display(Name = "Patrocinador")]
         public int? PatrocinadorId { get; set; }
         public Patrocinador Patrocinador { get; set; }  
         public List<Inscricao> Inscricoes { get; set; } = new List<Inscricao>();

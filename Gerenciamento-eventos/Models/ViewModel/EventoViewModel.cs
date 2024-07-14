@@ -1,4 +1,6 @@
-﻿namespace Gerenciamento_eventos.Models.ViewModel
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+
+namespace Gerenciamento_eventos.Models.ViewModel
 {
     public class EventoViewModel
     {

@@ -24,16 +24,31 @@ namespace Gerenciamento_eventos.Controllers
             _userManager = userManager;
         }
 
-        // GET: Evento
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(DateTime? data, int? localId, int? patrocinadorId)
         {
-            var gerenciamento_eventosContext = _context.Evento
+            var query = _context.Evento
                 .Include(e => e.Local)
                 .Include(e => e.Patrocinador)
-                .Include(e => e.Inscricoes); // Inclua as inscrições
+                .Include(e => e.Inscricoes)
+                .AsQueryable();
+
+            if (data.HasValue)
+            {
+                query = query.Where(e => e.Data.Date == data.Value.Date);
+            }
+
+            if (localId.HasValue && localId.Value != 0)
+            {
+                query = query.Where(e => e.LocalId == localId.Value);
+            }
+
+            if (patrocinadorId.HasValue && patrocinadorId.Value != 0)
+            {
+                query = query.Where(e => e.PatrocinadorId == patrocinadorId.Value);
+            }
 
             ViewBag.UserId = _userManager.GetUserAsync(User).Result.Id;
-            var eventos = await gerenciamento_eventosContext.ToListAsync();
+            var eventos = await query.ToListAsync();
 
             var eventosViewModel = eventos.Select(e => new EventoViewModel
             {
@@ -41,8 +56,12 @@ namespace Gerenciamento_eventos.Controllers
                 InscricoesCount = e.Inscricoes.Count
             }).ToList();
 
+            ViewBag.Locais = _context.Local.ToList();
+            ViewBag.Patrocinadores = _context.Patrocinador.ToList();
+
             return View(eventosViewModel);
         }
+
 
         // GET: Evento/Details/5
         public async Task<IActionResult> Details(int? id)

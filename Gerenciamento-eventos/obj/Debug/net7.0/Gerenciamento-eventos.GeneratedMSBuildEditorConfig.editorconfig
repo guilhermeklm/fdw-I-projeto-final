@@ -9,137 +9,137 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Gerenciamento_eventos
 build_property.RootNamespace = Gerenciamento_eventos
-build_property.ProjectDir = C:\Users\guilh\source\repos\Gerenciamento-eventos\Gerenciamento-eventos\
+build_property.ProjectDir = C:\Users\guilh\Source\Repos\fdw-I-projeto-final\Gerenciamento-eventos\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\guilh\source\repos\Gerenciamento-eventos\Gerenciamento-eventos
+build_property.MSBuildProjectDirectory = C:\Users\guilh\Source\Repos\fdw-I-projeto-final\Gerenciamento-eventos
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Areas/Identity/Pages/Account/Login.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Areas/Identity/Pages/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Areas/Identity/Pages/Account/Logout.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Areas/Identity/Pages/Account/Logout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Areas/Identity/Pages/Account/Register.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Areas/Identity/Pages/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Areas/Identity/Pages/Account/_ViewImports.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Areas/Identity/Pages/Account/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfVmlld0ltcG9ydHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Areas/Identity/Pages/_ViewImports.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Areas/Identity/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Areas/Identity/Pages/_ViewStart.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Areas/Identity/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Views/Evento/Create.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Views/Evento/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRvXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Views/Evento/Delete.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Views/Evento/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRvXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Views/Evento/Details.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Views/Evento/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRvXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Views/Evento/Edit.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Views/Evento/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRvXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Views/Evento/Index.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Views/Evento/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRvXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Views/Home/Index.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Views/Home/Privacy.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Views/Inscricao/Delete.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Views/Inscricao/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5zY3JpY2FvXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Views/Inscricao/Index.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Views/Inscricao/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5zY3JpY2FvXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Views/Local/Create.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Views/Local/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9jYWxcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Views/Local/Delete.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Views/Local/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9jYWxcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Views/Local/Details.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Views/Local/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9jYWxcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Views/Local/Edit.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Views/Local/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9jYWxcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Views/Local/Index.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Views/Local/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9jYWxcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Views/Patrocinador/Create.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Views/Patrocinador/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0cm9jaW5hZG9yXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Views/Patrocinador/Delete.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Views/Patrocinador/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0cm9jaW5hZG9yXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Views/Patrocinador/Details.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Views/Patrocinador/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0cm9jaW5hZG9yXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Views/Patrocinador/Edit.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Views/Patrocinador/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0cm9jaW5hZG9yXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Views/Patrocinador/Index.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Views/Patrocinador/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0cm9jaW5hZG9yXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Views/Shared/Error.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Views/Shared/_LoginPartial.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Views/_ViewImports.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Views/_ViewStart.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/guilh/source/repos/Gerenciamento-eventos/Gerenciamento-eventos/Views/Shared/_Layout.cshtml]
+[C:/Users/guilh/Source/Repos/fdw-I-projeto-final/Gerenciamento-eventos/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-b8u24fo1ux

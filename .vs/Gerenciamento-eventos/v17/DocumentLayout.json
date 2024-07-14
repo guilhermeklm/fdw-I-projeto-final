@@ -1,20 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\guilh\\source\\repos\\fdw-I-projeto-final\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{4C8CB92A-2BD3-4F9F-8506-3F24C5A17F97}|Gerenciamento-eventos\\Gerenciamento-eventos.csproj|c:\\users\\guilh\\source\\repos\\fdw-i-projeto-final\\gerenciamento-eventos\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4C8CB92A-2BD3-4F9F-8506-3F24C5A17F97}|Gerenciamento-eventos\\Gerenciamento-eventos.csproj|solutionrelative:gerenciamento-eventos\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4C8CB92A-2BD3-4F9F-8506-3F24C5A17F97}|Gerenciamento-eventos\\Gerenciamento-eventos.csproj|c:\\users\\guilh\\source\\repos\\fdw-i-projeto-final\\gerenciamento-eventos\\areas\\identity\\data\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4C8CB92A-2BD3-4F9F-8506-3F24C5A17F97}|Gerenciamento-eventos\\Gerenciamento-eventos.csproj|solutionrelative:gerenciamento-eventos\\areas\\identity\\data\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4C8CB92A-2BD3-4F9F-8506-3F24C5A17F97}|Gerenciamento-eventos\\Gerenciamento-eventos.csproj|c:\\users\\guilh\\source\\repos\\fdw-i-projeto-final\\gerenciamento-eventos\\controllers\\eventocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4C8CB92A-2BD3-4F9F-8506-3F24C5A17F97}|Gerenciamento-eventos\\Gerenciamento-eventos.csproj|solutionrelative:gerenciamento-eventos\\controllers\\eventocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -22,50 +9,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Register.cshtml.cs",
-              "DocumentMoniker": "C:\\Users\\guilh\\source\\repos\\fdw-I-projeto-final\\Gerenciamento-eventos\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
-              "RelativeDocumentMoniker": "Gerenciamento-eventos\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
-              "ToolTip": "C:\\Users\\guilh\\source\\repos\\fdw-I-projeto-final\\Gerenciamento-eventos\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
-              "RelativeToolTip": "Gerenciamento-eventos\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
-              "ViewState": "AQIAAD4AAAAAAAAAAAAwwFsAAAAlAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-14T07:55:53.947Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Usuario.cs",
-              "DocumentMoniker": "C:\\Users\\guilh\\source\\repos\\fdw-I-projeto-final\\Gerenciamento-eventos\\Areas\\Identity\\Data\\Usuario.cs",
-              "RelativeDocumentMoniker": "Gerenciamento-eventos\\Areas\\Identity\\Data\\Usuario.cs",
-              "ToolTip": "C:\\Users\\guilh\\source\\repos\\fdw-I-projeto-final\\Gerenciamento-eventos\\Areas\\Identity\\Data\\Usuario.cs",
-              "RelativeToolTip": "Gerenciamento-eventos\\Areas\\Identity\\Data\\Usuario.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-14T07:55:09.455Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "EventoController.cs",
-              "DocumentMoniker": "C:\\Users\\guilh\\source\\repos\\fdw-I-projeto-final\\Gerenciamento-eventos\\Controllers\\EventoController.cs",
-              "RelativeDocumentMoniker": "Gerenciamento-eventos\\Controllers\\EventoController.cs",
-              "ToolTip": "C:\\Users\\guilh\\source\\repos\\fdw-I-projeto-final\\Gerenciamento-eventos\\Controllers\\EventoController.cs",
-              "RelativeToolTip": "Gerenciamento-eventos\\Controllers\\EventoController.cs",
-              "ViewState": "AQIAABwBAAAAAAAAAAAswAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-14T07:38:03.446Z",
-              "EditorCaption": ""
             }
           ]
         }

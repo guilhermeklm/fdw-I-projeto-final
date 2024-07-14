@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "xQR2icUV+6d9huW1taO/mJ8cfkBKEu9ID//kDP2hXc8=",
+  "Hash": "xFjx56JIfrPUFipy8VsCxjuvXt8Dh33jsGAACsy7JY8=",
   "Source": "Gerenciamento-eventos",
   "BasePath": "_content/Gerenciamento-eventos",
   "Mode": "Default",
@@ -1392,6 +1392,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Identity": "C:\\Users\\guilh\\source\\repos\\fdw-I-projeto-final\\Gerenciamento-eventos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-old.min.css",
+      "SourceId": "Gerenciamento-eventos",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\guilh\\source\\repos\\fdw-I-projeto-final\\Gerenciamento-eventos\\wwwroot\\",
+      "BasePath": "_content/Gerenciamento-eventos",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-old.min.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-old.min.css"
     },
     {
       "Identity": "C:\\Users\\guilh\\source\\repos\\fdw-I-projeto-final\\Gerenciamento-eventos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",

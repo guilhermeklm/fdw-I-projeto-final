@@ -53,6 +53,10 @@
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
     },
     {
+      "Id": "C:\\Users\\guilh\\source\\repos\\fdw-I-projeto-final\\Gerenciamento-eventos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-old.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-old.min.css"
+    },
+    {
       "Id": "C:\\Users\\guilh\\source\\repos\\fdw-I-projeto-final\\Gerenciamento-eventos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
     },

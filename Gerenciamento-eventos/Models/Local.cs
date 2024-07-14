@@ -18,6 +18,7 @@ namespace Gerenciamento_eventos.Models
         [Range(1, int.MaxValue, ErrorMessage = "A capacidade deve ser um valor positivo")]
         public int Capacidade { get; set; }
 
+        [Required(ErrorMessage = "A descrição é obrigatória")]
         [StringLength(500, ErrorMessage = "A descrição não pode exceder 500 caracteres")]
         public string Descricao { get; set; }
 

@@ -9,11 +9,16 @@ namespace Gerenciamento_eventos.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        [Required(ErrorMessage = "O nome é obrigatório.")]
+        [Display(Name = "Nome")]
         public string Nome { get; set; }
 
+        [Required(ErrorMessage = "O email é obrigatório.")]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
-        public string Telefone { get; set; }
+        [Display(Name = "Telefone")]
+        public string? Telefone { get; set; }
 
         public List<Evento> Eventos { get; set; } = new List<Evento>();
     }

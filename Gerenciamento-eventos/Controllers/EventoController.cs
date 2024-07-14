@@ -33,7 +33,6 @@ namespace Gerenciamento_eventos.Controllers
             ViewBag.UserId = _userManager.GetUserAsync(User).Result.Id;
             var eventos = await gerenciamento_eventosContext.ToListAsync();
 
-            ViewBag.Inscricoes = await _context.Inscricao.Include(i => i.Evento).ToListAsync();
 
             return View(eventos);
         }

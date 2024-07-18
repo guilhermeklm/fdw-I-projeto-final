@@ -76,6 +76,7 @@ namespace Gerenciamento_eventos.Controllers
                 .Include(e => e.Criador)
                 .Include(e => e.Patrocinador)
                 .Include(e => e.Inscricoes)
+                .ThenInclude(i => i.Participante)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (evento == null)
@@ -86,13 +87,15 @@ namespace Gerenciamento_eventos.Controllers
             var viewModel = new EventoViewModel
             {
                 Evento = evento,
-                InscricoesCount = evento.Inscricoes.Count
+                InscricoesCount = evento.Inscricoes.Count,
+                Participantes = evento.Inscricoes.Select(i => i.Participante).ToList()
             };
 
             ViewBag.UserId = _userManager.GetUserAsync(User).Result.Id;
 
             return View(viewModel);
         }
+
 
         // GET: Evento/Create
         public IActionResult Create()
@@ -278,7 +281,6 @@ namespace Gerenciamento_eventos.Controllers
             participante.UsuarioId = user.Id;
             participante.Nome = user.Nome;
             participante.Email = user.Email;
-            participante.Eventos.Add(evento);
 
             _context.Participante.Add(participante);
             await _context.SaveChangesAsync();

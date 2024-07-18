@@ -141,9 +141,6 @@ namespace Gerenciamento_eventos.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("ParticipanteId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int?>("PatrocinadorId")
                         .HasColumnType("int");
 
@@ -152,8 +149,6 @@ namespace Gerenciamento_eventos.Migrations
                     b.HasIndex("CriadorId");
 
                     b.HasIndex("LocalId");
-
-                    b.HasIndex("ParticipanteId");
 
                     b.HasIndex("PatrocinadorId");
 
@@ -174,18 +169,15 @@ namespace Gerenciamento_eventos.Migrations
                     b.Property<int>("EventoId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ParticipanteId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("ParticipanteUsuarioId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EventoId");
 
-                    b.HasIndex("ParticipanteId");
+                    b.HasIndex("ParticipanteUsuarioId");
 
                     b.ToTable("Inscricao");
                 });
@@ -237,7 +229,7 @@ namespace Gerenciamento_eventos.Migrations
 
                     b.Property<string>("UsuarioId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -417,10 +409,6 @@ namespace Gerenciamento_eventos.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Gerenciamento_eventos.Models.Participante", null)
-                        .WithMany("Eventos")
-                        .HasForeignKey("ParticipanteId");
-
                     b.HasOne("Gerenciamento_eventos.Models.Patrocinador", "Patrocinador")
                         .WithMany("Eventos")
                         .HasForeignKey("PatrocinadorId");
@@ -442,7 +430,10 @@ namespace Gerenciamento_eventos.Migrations
 
                     b.HasOne("Gerenciamento_eventos.Models.Participante", "Participante")
                         .WithMany("Inscricoes")
-                        .HasForeignKey("ParticipanteId");
+                        .HasForeignKey("ParticipanteUsuarioId")
+                        .HasPrincipalKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Evento");
 
@@ -512,8 +503,6 @@ namespace Gerenciamento_eventos.Migrations
 
             modelBuilder.Entity("Gerenciamento_eventos.Models.Participante", b =>
                 {
-                    b.Navigation("Eventos");
-
                     b.Navigation("Inscricoes");
                 });
 

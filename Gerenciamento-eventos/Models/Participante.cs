@@ -12,6 +12,5 @@ namespace Gerenciamento_eventos.Models
         public string Nome { get; set; }
         public string Email { get; set; }
         public List<Inscricao> Inscricoes { get; set; } = new List<Inscricao>();
-        public List<Evento> Eventos { get; set; } = new List<Evento>();  
     }
 }

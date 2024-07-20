@@ -19,6 +19,17 @@
     </div>
 }
 
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <p>@error.ErrorMessage</p>
+        }
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
 <form method="get" asp-action="Index">
     <div class="row mb-3">
         <div class="col-md-4">
@@ -55,7 +66,7 @@
         <div class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">@item.Evento.Nome</h5>
-                <small>@item.Evento.Data</small>
+                <small>@item.Evento.DataInicio - @item.Evento.DataFim </small>
             </div>
             <p class="mb-1">@item.Evento.Descricao</p>
             <small>Local: @item.Evento.Local.Nome (Endereço: @item.Evento.Local.Endereco)</small>

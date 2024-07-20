@@ -14,10 +14,15 @@ namespace Gerenciamento_eventos.Models
         [Required(ErrorMessage = "A Descricao é obrigatório.")]
         public string Descricao { get; set; }
 
-        [Required(ErrorMessage = "A data é obrigatória.")]
+        [Required(ErrorMessage = "A data inicio é obrigatória.")]
         [DataType(DataType.DateTime, ErrorMessage = "Data inválida.")]
-        [Display(Name = "Data do Evento")]
-        public DateTime Data { get; set; }
+        [Display(Name = "Data do inicio do Evento")]
+        public DateTime DataInicio { get; set; }
+
+        [Required(ErrorMessage = "A data fim é obrigatória.")]
+        [DataType(DataType.DateTime, ErrorMessage = "Data inválida.")]
+        [Display(Name = "Data do fim do Evento")]
+        public DateTime DataFim { get; set; }
 
         [Required(ErrorMessage = "O local é obrigatório.")]
         [Display(Name = "Local")]

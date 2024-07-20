@@ -102,7 +102,6 @@ namespace Gerenciamento_eventos.Controllers
             var inscricao = _context.Inscricao.First(i => i.EventoId == id && i.ParticipanteUsuarioId == participante.UsuarioId);
 
             _context.Inscricao.Remove(inscricao);
-            _context.Participante.Remove(participante);
             await _context.SaveChangesAsync();
 
             TempData["SuccessMessage"] = "Desinscricao realizada com sucesso!";

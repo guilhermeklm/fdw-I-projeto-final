@@ -868,3 +868,4 @@ C:\Users\guilh\source\repos\fdw-I-projeto-final\Gerenciamento-eventos\obj\Debug\
 C:\Users\guilh\source\repos\fdw-I-projeto-final\Gerenciamento-eventos\obj\Debug\net7.0\Gerenciamento-eventos.pdb
 C:\Users\guilh\source\repos\fdw-I-projeto-final\Gerenciamento-eventos\obj\Debug\net7.0\Gerenciamento-eventos.genruntimeconfig.cache
 C:\Users\guilh\source\repos\fdw-I-projeto-final\Gerenciamento-eventos\obj\Debug\net7.0\ref\Gerenciamento-eventos.dll
+C:\Users\guilh\Source\Repos\fdw-I-projeto-final\Gerenciamento-eventos\obj\Debug\net7.0\Gerenciamento-eventos.sourcelink.json

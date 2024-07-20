@@ -34,7 +34,18 @@ namespace Gerenciamento_eventos.Controllers
 
             if (data.HasValue)
             {
-                query = query.Where(e => e.Data.Date == data.Value.Date);
+                if (data.Value.Date < DateTime.Now.Date)
+                {
+                    ModelState.AddModelError(string.Empty, "A data fornecida não pode ser anterior à data atual.");
+                    ViewBag.Locais = _context.Local.ToList();
+                    ViewBag.Patrocinadores = _context.Patrocinador.ToList();
+                    return View(new List<EventoViewModel>());
+                }
+
+                query = query.Where(e => e.DataInicio.Date == data.Value.Date);
+            } else {
+                query = query.Where(e => e.DataInicio.Date >= DateTime.Now.Date)
+                     .OrderBy(e => e.DataInicio);
             }
 
             if (localId.HasValue && localId.Value != 0)
@@ -110,18 +121,34 @@ namespace Gerenciamento_eventos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Descricao,Data,LocalId,PatrocinadorId")] Evento evento)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Descricao,DataInicio,DataFim,LocalId,PatrocinadorId")] Evento evento)
         {
+            var (isValid, mensagemErro) = await ValidarDatasEvento(evento);
+            
+            if (!isValid)
+            {
+                ModelState.AddModelError(string.Empty, mensagemErro);
+                ViewData["LocalId"] = new SelectList(_context.Set<Local>(), "Id", "Nome");
+                ViewData["PatrocinadorId"] = new SelectList(_context.Set<Patrocinador>(), "Id", "Nome");
+                return View(evento);
+            }
+
             if (evento.LocalId != 0) {
                 evento.Local = _context.Local.Find(evento.LocalId);
 
                 if (evento.Local == null) {
-                    return BadRequest("Local nao encontrado");   
+                    ModelState.AddModelError(string.Empty, "Local nao encontrado");
+                    ViewData["LocalId"] = new SelectList(_context.Set<Local>(), "Id", "Nome");
+                    ViewData["PatrocinadorId"] = new SelectList(_context.Set<Patrocinador>(), "Id", "Nome");
+                    return View(evento);
                 }
             }
             else
             {
-                return BadRequest("Local é obrigatorio");
+                ModelState.AddModelError(string.Empty, "Local é obrigatorio");
+                ViewData["LocalId"] = new SelectList(_context.Set<Local>(), "Id", "Nome");
+                ViewData["PatrocinadorId"] = new SelectList(_context.Set<Patrocinador>(), "Id", "Nome");
+                return View(evento);
             }
 
             if (evento.PatrocinadorId.HasValue && evento.PatrocinadorId.Value != 0)
@@ -129,7 +156,10 @@ namespace Gerenciamento_eventos.Controllers
                 evento.Patrocinador = await _context.Patrocinador.FindAsync(evento.PatrocinadorId.Value);
                 if (evento.Patrocinador == null)
                 {
-                    return BadRequest("Patrocinador não encontrado");
+                    ModelState.AddModelError(string.Empty, "Patrocinador não encontrado");
+                    ViewData["LocalId"] = new SelectList(_context.Set<Local>(), "Id", "Nome");
+                    ViewData["PatrocinadorId"] = new SelectList(_context.Set<Patrocinador>(), "Id", "Nome");
+                    return View(evento);
                 }
             }
             else
@@ -147,12 +177,42 @@ namespace Gerenciamento_eventos.Controllers
             }
             else
             {
-                return BadRequest("Usuario invalido");
+                ModelState.AddModelError(string.Empty, "Usuario invalido");
+                ViewData["LocalId"] = new SelectList(_context.Set<Local>(), "Id", "Nome");
+                ViewData["PatrocinadorId"] = new SelectList(_context.Set<Patrocinador>(), "Id", "Nome");
+                return View(evento);
             }
 
             _context.Add(evento);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        private async Task<(bool valido, string mensagemErro)> ValidarDatasEvento(Evento evento)
+        {
+
+            if (evento.DataFim <= evento.DataInicio)
+            {
+                return (false, "A data fim não pode ser antes ou igual à data de início.");
+            }
+
+            if ((evento.DataFim - evento.DataInicio).TotalHours < 1)
+            {
+                return (false, "A data fim deve ter no mínimo uma hora de diferença em relação à data de início.");
+            }
+
+            var eventoExistente = await _context.Evento
+                .Where(e => e.LocalId == evento.LocalId &&
+                            ((evento.DataInicio >= e.DataInicio && evento.DataInicio < e.DataFim) ||
+                             (evento.DataFim > e.DataInicio && evento.DataFim <= e.DataFim)))
+                .FirstOrDefaultAsync();
+
+            if (eventoExistente != null)
+            {
+                return (false, "Já existe um evento neste local no mesmo horário.");
+            }
+
+            return (true, string.Empty);
         }
 
         // GET: Evento/Edit/5
@@ -166,6 +226,8 @@ namespace Gerenciamento_eventos.Controllers
             var evento = await _context.Evento.FindAsync(id);
             if (evento == null)
             {
+                ViewData["LocalId"] = new SelectList(_context.Set<Local>(), "Id", "Nome", evento.LocalId);
+                ViewData["PatrocinadorId"] = new SelectList(_context.Set<Patrocinador>(), "Id", "Nome", evento.PatrocinadorId);
                 return NotFound();
             }
 
@@ -180,7 +242,7 @@ namespace Gerenciamento_eventos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Descricao,Data,LocalId,PatrocinadorId")] Evento evento)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Descricao,DataInicio,DataFim,LocalId,PatrocinadorId")] Evento evento)
         {
             if (id != evento.Id)
             {
@@ -194,12 +256,25 @@ namespace Gerenciamento_eventos.Controllers
                 return NotFound("Evento nao encontrado");
             }
 
+            var (isValid, mensagemErro) = await ValidarDatasEvento(evento);
+
+            if (!isValid)
+            {
+                ModelState.AddModelError(string.Empty, mensagemErro);
+                ViewData["LocalId"] = new SelectList(_context.Set<Local>(), "Id", "Nome");
+                ViewData["PatrocinadorId"] = new SelectList(_context.Set<Patrocinador>(), "Id", "Nome");
+                return View(evento);
+            }
+
             if (evento.PatrocinadorId.HasValue && evento.PatrocinadorId.Value != 0)
             {
                 evento.Patrocinador = await _context.Patrocinador.FindAsync(evento.PatrocinadorId.Value);
                 if (evento.Patrocinador == null)
                 {
-                    return BadRequest("Patrocinador não encontrado");
+                    ModelState.AddModelError(string.Empty, "Patrocinador não encontrado");
+                    ViewData["LocalId"] = new SelectList(_context.Set<Local>(), "Id", "Nome");
+                    ViewData["PatrocinadorId"] = new SelectList(_context.Set<Patrocinador>(), "Id", "Nome");
+                    return View(evento);
                 }
             }
             else
@@ -210,7 +285,8 @@ namespace Gerenciamento_eventos.Controllers
             eventoSaved.Nome = evento.Nome;
             eventoSaved.LocalId = evento.LocalId;
             eventoSaved.PatrocinadorId = evento.PatrocinadorId;
-            eventoSaved.Data = evento.Data;
+            eventoSaved.DataInicio = evento.DataInicio;
+            eventoSaved.DataFim = evento.DataFim;
             eventoSaved.Descricao = evento.Descricao;
 
             await _context.SaveChangesAsync();
@@ -277,13 +353,20 @@ namespace Gerenciamento_eventos.Controllers
 
             var user = _userManager.GetUserAsync(User).Result;
 
-            var participante = new Participante();
-            participante.UsuarioId = user.Id;
-            participante.Nome = user.Nome;
-            participante.Email = user.Email;
+            var participante = await _context.Participante.FirstOrDefaultAsync(p => p.UsuarioId == user.Id);
 
-            _context.Participante.Add(participante);
-            await _context.SaveChangesAsync();
+            if (participante == null)
+            {
+                participante = new Participante
+                {
+                    UsuarioId = user.Id,
+                    Nome = user.Nome,
+                    Email = user.Email
+                };
+
+                _context.Participante.Add(participante);
+                await _context.SaveChangesAsync();
+            }
 
             var inscricao = new Inscricao();
             inscricao.EventoId = id.Value;
@@ -314,7 +397,6 @@ namespace Gerenciamento_eventos.Controllers
             var inscricao = _context.Inscricao.First(i => i.EventoId == id && i.ParticipanteUsuarioId == participante.UsuarioId);
 
             _context.Inscricao.Remove(inscricao);
-            _context.Participante.Remove(participante);
             await _context.SaveChangesAsync();
 
             TempData["SuccessMessage"] = "Desinscricao realizada com sucesso!";

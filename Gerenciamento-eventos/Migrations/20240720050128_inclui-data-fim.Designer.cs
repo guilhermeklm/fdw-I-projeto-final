@@ -4,6 +4,7 @@ using Gerenciamento_eventos.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gerenciamento_eventos.Migrations
 {
     [DbContext(typeof(Gerenciamento_eventosContext))]
-    partial class Gerenciamento_eventosContextModelSnapshot : ModelSnapshot
+    [Migration("20240720050128_inclui-data-fim")]
+    partial class incluidatafim
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
